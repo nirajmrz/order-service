@@ -19,7 +19,8 @@ public class AwsPipelineCicdApplication {
 	
 	@GetMapping
 	public List<Order> fetchOrder(){
-		return orderDao.getOrders();
+			return orderDao.getOrders().stream()
+				.sorted(Comparator.comparing(Order::getPrice)).collect(Collectors.toList());
 	}
 	
 	public static void main(String[] args) {
